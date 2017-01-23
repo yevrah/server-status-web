@@ -1,10 +1,12 @@
-#needed to determine OS to run the correct ping command
 import os
-
+import datetime
 #put the path to the file with your hostnames
 names_list = "file.txt"
 #put the path that you would like the report to be written to
 output_file_name = "status.html"
+
+today=(datetime.datetime.now())
+now=today.strftime("%m/%d/%Y %H:%M:%S")
 
 #floats needed to determine accurate percentage
 servers_up=0.00
@@ -46,7 +48,7 @@ html_file.write("</head>")
 html_file.write("\n")
 html_file.write("<body>")
 html_file.write("\n")
-html_file.write("<div id=\"circle\"></div>")
+html_file.write("<div id=\"circle\"><strong></strong></div>")
 html_file.write("\n")
 html_file.write("<script>")
 html_file.write("\n")
@@ -60,11 +62,15 @@ html_file.write("thickness: 10,")
 html_file.write("\n")
 html_file.write("emptyFill: \"#262b33\",")
 html_file.write("\n")
-html_file.write("fill: { color: [\"#0277BD\"]}});")
+html_file.write("fill: { color: [\"#0277BD\"]}")
+html_file.write("\n")
+html_file.write("}).on(\'circle-animation-progress\', function(event, progress, stepValue) {$(this).children(\'strong\').text((stepValue * 100).toFixed(0) + \'%\');});")
 html_file.write("\n")
 html_file.write("</script>")
 html_file.write("\n")
 html_file.write("<script type=\"text/javascript\" src=\"js/notifications.js\"></script>")
+html_file.write("\n")
+html_file.write("<script>noty({text: \"Report created " + now +"\" ,type: \'information\'});</script>")
 html_file.write("\n")
 html_file.write("<body>")
 html_file.write("\n")
